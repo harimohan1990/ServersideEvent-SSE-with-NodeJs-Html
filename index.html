@@ -1,0 +1,23 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="messages" ></div>
+    <script>
+  const eventSource = new EventSource("http://localhost:3000/events");
+
+  eventSource.onmessage = function(event) {
+    const msg = document.createElement("p");
+    msg.textContent = event.data;
+    document.getElementById("messages").appendChild(msg);
+  };
+
+  eventSource.onerror = function() {
+    console.log("EventSource connection lost.");
+  };
+</script>
+</body>
+</html>
